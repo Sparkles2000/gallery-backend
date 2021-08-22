@@ -21,7 +21,7 @@ class Application
       id = req.path.split('/')[2]
       begin
         artwork = Artwork.find(id)
-        return [200, {'Content-Type' => 'application/json'}, [artwork.as_json(include: :artworks).to_json]]
+        return [200, {'Content-Type' => 'application/json'}[artwork.to_json]]
       rescue
         return [404, {'Content-Type' => 'application/json'}, [{message: "Artwork not found"}.to_json]]
       end

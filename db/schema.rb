@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_22_224848) do
+ActiveRecord::Schema.define(version: 2021_08_22_225632) do
 
   create_table "artists", force: :cascade do |t|
     t.string "name"
     t.string "interests"
     t.datetime "artist_established"
+  end
+
+  create_table "artworks", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "art_style"
+    t.datetime "published_date"
+    t.string "img_url"
+    t.integer "artist_id"
+    t.index ["artist_id"], name: "index_artworks_on_artist_id"
   end
 
 end

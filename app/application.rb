@@ -7,7 +7,7 @@ class Application
     # ARTWORK ROUTES
 
     # Artwork Index
-    if req.path == '/artworks' && req.get?
+    if req.path == ('/artworks') && req.get?
       return [200, {'Content-Type' => 'application/json'}, [Artwork.all.to_json]]
     end
     # Artwork Create
@@ -21,7 +21,7 @@ class Application
       id = req.path.split('/')[2]
       begin
         artwork = Artwork.find(id)
-        return [200, {'Content-Type' => 'application/json'}[artwork.to_json]]
+        return [200, {'Content-Type' => 'application/json'}, [artwork.to_json]]
       rescue
         return [404, {'Content-Type' => 'application/json'}, [{message: "Artwork not found"}.to_json]]
       end
@@ -51,7 +51,7 @@ class Application
     # ARTIST ROUTES
 
     # Artist Index
-    if req.path == '/artists' && req.get?
+    if req.path == ('/artists') && req.get?
       return [200, {'Content-Type' => 'application/json'}, [Artist.all.to_json]]
     end
     # Artist Create
@@ -60,9 +60,7 @@ class Application
       artist = Artist.create(body)
       return [201, {'Content-Type' => 'application/json'}, [artist.to_json]]
     end
-
     # Artist Show
-
     if req.path.match('/artists/') && req.get?
       id = req.path.split('/')[2]
       begin
@@ -95,16 +93,11 @@ class Application
       end
     end
 
-
     if req.path.match(/test/) 
       return [200, { 'Content-Type' => 'application/json' }, [ {:message => "test response!"}.to_json ]]
-
     else
       res.write "Path Not Found"
-
     end
-
     res.finish
   end
-
 end
